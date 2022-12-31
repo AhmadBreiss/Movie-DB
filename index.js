@@ -96,7 +96,7 @@ app.get("/movies/get/id/:ID", (req, res) => {
   }
 });
 // step 8
-app.get("/movies/add/title/:title/&year/:year/&rating/:rating", (req, res) => {
+app.post("/movies/add/title/:title/&year/:year/&rating/:rating", (req, res) => {
   if (
     req.params.title != " " &&
     req.params.year >= 1000 &&
@@ -120,7 +120,7 @@ app.get("/movies/add/title/:title/&year/:year/&rating/:rating", (req, res) => {
   }
 });
 // step 9
-app.get("/movies/delete/id/:ID", (req, res) => {
+app.delete("/movies/delete/id/:ID", (req, res) => {
   if (req.params.ID >= 0 && req.params.ID < movies.length) {
     movies.splice(req.params.ID, 1);
     res.send(movies);
@@ -133,14 +133,14 @@ app.get("/movies/delete/id/:ID", (req, res) => {
   }
 });
 // step 10
-app.get("/movies/edit/id/:id/title/:title", (req, res) => {
+app.put("/movies/edit/id/:id/title/:title", (req, res) => {
   if (req.params.id >= 0 && req.params.id < movies.length) {
     movies[req.params.id].title = req.params.title;
     res.send(movies);
   }
 });
 
-app.get("/movies/edit/id/:id/title/:title/rating/:rating", (req, res) => {
+app.put("/movies/edit/id/:id/title/:title/rating/:rating", (req, res) => {
   if (req.params.id >= 0 && req.params.id < movies.length) {
     movies[req.params.id].title = req.params.title;
     movies[req.params.id].rating = req.params.rating;
@@ -148,7 +148,7 @@ app.get("/movies/edit/id/:id/title/:title/rating/:rating", (req, res) => {
   }
 });
 
-app.get(
+app.put(
   "/movies/edit/id/:id/title/:title/rating/:rating/year/:year",
   (req, res) => {
     if (req.params.id >= 0 && req.params.id < movies.length) {
