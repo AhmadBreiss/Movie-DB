@@ -42,31 +42,8 @@ app.get("/search", (req, res) => {
 });
 // step5
 
-app.get("/movies/add/title/:title/&year/:year/&rating/:rating", (req, res) => {
-  if (
-    req.params.title != " " &&
-    req.params.year >= 1000 &&
-    req.params.rating != 0 &&
-    req.params.rating > 0
-  ) {
-    if (req.params.rating == " ") {
-      req.params.rating = 4;
-      movies.push(req.params);
-      res.send(movies);
-    } else {
-      movies.push(req.params);
-      res.send(movies);
-    }
-  } else {
-    res
-      .status(403)
-      .send({
-        status: 403,
-        error: true,
-        message:
-          "you cannot create a movie without providing a title and a year",
-      });
-  }
+app.get("/movies/add", (req, res) => {
+  res.send("movie add");
 });
 
 app.get("/movies/get", (req, res) => {
@@ -118,6 +95,32 @@ app.get("/movies/get/id/:ID", (req, res) => {
     });
   }
 });
-// step 8 "in step 5"
+// step 8
+app.get("/movies/add/title/:title/&year/:year/&rating/:rating", (req, res) => {
+  if (
+    req.params.title != " " &&
+    req.params.year >= 1000 &&
+    req.params.rating != 0 &&
+    req.params.rating > 0
+  ) {
+    if (req.params.rating == " ") {
+      req.params.rating = 4;
+      movies.push(req.params);
+      res.send(movies);
+    } else {
+      movies.push(req.params);
+      res.send(movies);
+    }
+  } else {
+    res
+      .status(403)
+      .send({
+        status: 403,
+        error: true,
+        message:
+          "you cannot create a movie without providing a title and a year",
+      });
+  }
+});
 
 app.listen(PORT, () => console.log(`server in now listening on port ${PORT}`));
