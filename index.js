@@ -52,5 +52,23 @@ app.get('/movies/delete', (req, res)=>{
     res.send("movie delete");
 })
 
+// step6
+app.get('/movies/get/:text', (req, res)=>{
+    if(req.params.text==="by-date"){
+        res.status(200).send({status:200, data:movies.sort((a, b)=> a.year - b.year)})
+    }else if(req.params.text==="by-rating"){
+        res.status(200).send({status:200, data:movies.sort((a, b)=>b.rating - a.rating)})
+    }else if (req.params.text==="by-title"){
+        res.status(200).send({status:200, data:movies.sort((a, b)=>
+            {if(a.title>b.title){
+                return 1;
+            }else if (b.title>a.title){
+                return -1;
+            }else{
+                return 0;
+            }
+        })})
+    }
+});   
 
 app.listen(PORT, () => console.log(`server in now listening on port ${PORT}`))
